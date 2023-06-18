@@ -16745,7 +16745,7 @@ const main = async () => {
     repo: _actions_github__WEBPACK_IMPORTED_MODULE_0__.context.repo.repo
   }
 
-  _actions_core__WEBPACK_IMPORTED_MODULE_1__.info(JSON.stringify(_actions_github__WEBPACK_IMPORTED_MODULE_0__.context))
+  _actions_core__WEBPACK_IMPORTED_MODULE_1__.info(_actions_github__WEBPACK_IMPORTED_MODULE_0__.context.payload.number)
 
   // const { data: pullRequest } = await octokit.rest.pulls.get({
   //   ...githubCreds,

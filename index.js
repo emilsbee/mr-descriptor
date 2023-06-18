@@ -14,7 +14,7 @@ const main = async () => {
     repo: github.context.repo.repo
   }
 
-  core.info(JSON.stringify(github.context))
+  core.info(github.context.payload.number)
 
   // const { data: pullRequest } = await octokit.rest.pulls.get({
   //   ...githubCreds,
