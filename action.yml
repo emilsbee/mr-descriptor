@@ -1,0 +1,17 @@
+name: 'OpenAI generated merge request description'
+description: 'OpenAI generated merge request description'
+author: 'Emils Bernhards'
+runs:
+  using: 'node18'
+  main: 'index.js'
+  pre: 'deps.js'
+inputs:
+  github_token:
+    description: 'The GITHUB_TOKEN secret'
+    required: true
+  openai_token:
+    description: 'The OpenAI api key'
+    required: true
+branding:
+  icon: git-pull-request
+  color: green

@@ -1,0 +1,17 @@
+name: Test the mr descriptor
+on:
+  pull_request:
+    branches:
+    - main
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+      - name: Generate description
+        uses: emilsbee/mr-descriptor@main
+        with:
+          openai_token: ${{ secrets.OPENAI_TOKEN }}
+          github_token: ${{ secrets.GH_TOKEN }}
