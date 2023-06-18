@@ -11,6 +11,3 @@ inputs:
   openai_token:
     description: 'The OpenAI api key'
     required: true
-branding:
-  icon: git-pull-request
-  color: green
