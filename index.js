@@ -1,6 +1,7 @@
 import * as github from '@actions/github'
 import * as core from '@actions/core'
 import * as openai from 'openai';
+import fetch from 'node-fetch';
 
 const main = async () => {
   const githubToken = core.getInput('github_token', { required: true });

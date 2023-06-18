@@ -2,7 +2,7 @@ name: 'OpenAI generated merge request description'
 description: 'OpenAI generated merge request description'
 author: 'Emils Bernhards'
 runs:
-  using: 'node18'
+  using: 'node16'
   main: 'index.js'
   pre: 'deps.js'
 inputs:
