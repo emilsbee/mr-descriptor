@@ -23857,7 +23857,6 @@ const main = async () => {
   
   const openAiRes = await openaiClient.createChatCompletion({
     model: "gpt-3.5-turbo",
-    // messages: [{role: "user", content: `imagine that you are summarizing merge request changes for a developer who will be reviewing the code, can you summarize the following git diff in JSON that looks like [{ "explanation": "add explaantion here" }]  ${prDiff}`}],
     messages: [{role: "user", content: `imagine that you are summarizing merge request changes for a developer who will be reviewing the code, can you summarize the following git diff in bulletpoints ${prDiff}`}],
   });
   
