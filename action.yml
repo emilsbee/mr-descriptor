@@ -3,8 +3,7 @@ description: 'OpenAI generated merge request description'
 author: 'Emils Bernhards'
 runs:
   using: 'node16'
-  main: 'index.js'
-  pre: 'deps.js'
+  main: 'dist/index.js'
 inputs:
   github_token:
     description: 'The GITHUB_TOKEN secret'
