@@ -11,34 +11,32 @@ const main = async () => {
   
   const githubCreds = {
     owner: github.context.repo.owner,
-    repo: github.context.repo.repo
+    repo: github.context.repo.repo,
+    pull_number: github.context.payload.number,
   }
 
-  core.info(github.context.payload.number)
+  const { data: pullRequest } = await octokit.rest.pulls.get({
+    ...githubCreds,
+    pull_number: 1,
+  })
 
-  // const { data: pullRequest } = await octokit.rest.pulls.get({
-  //   ...githubCreds,
-  //   pull_number: 1,
-  // })
+  const prDiffRes = await fetch(pullRequest.diff_url);
+  const prDiff = await prDiffRes.text()
 
-  // const prDiffRes = await fetch(pullRequest.diff_url);
-  // const prDiff = await prDiffRes.text()
-
-  // const openaiClient = new openai.OpenAIApi(new openai.Configuration({
-  //   apiKey: openAiToken,
-  // }));
+  const openaiClient = new openai.OpenAIApi(new openai.Configuration({
+    apiKey: openAiToken,
+  }));
   
-  // const openAiRes = await openaiClient.createChatCompletion({
-  //   model: "gpt-3.5-turbo",
-  //   // messages: [{role: "user", content: `imagine that you are summarizing merge request changes for a developer who will be reviewing the code, can you summarize the following git diff in JSON that looks like [{ "explanation": "add explaantion here" }]  ${prDiff}`}],
-  //   messages: [{role: "user", content: `imagine that you are summarizing merge request changes for a developer who will be reviewing the code, can you summarize the following git diff in bulletpoints ${prDiff}`}],
-  // });
+  const openAiRes = await openaiClient.createChatCompletion({
+    model: "gpt-3.5-turbo",
+    // messages: [{role: "user", content: `imagine that you are summarizing merge request changes for a developer who will be reviewing the code, can you summarize the following git diff in JSON that looks like [{ "explanation": "add explaantion here" }]  ${prDiff}`}],
+    messages: [{role: "user", content: `imagine that you are summarizing merge request changes for a developer who will be reviewing the code, can you summarize the following git diff in bulletpoints ${prDiff}`}],
+  });
   
-  // await octokit.rest.pulls.update({
-  //   ...githubCreds,
-  //   pull_number: 1,
-  //   body: openAiRes.data.choices[0].message?.content
-  // })
+  await octokit.rest.pulls.update({
+    ...githubCreds,
+    body: openAiRes.data.choices[0].message?.content
+  })
 };
 
 main();
